@@ -37,6 +37,6 @@ jobs:
             git pull &&
             cd backend &&  # backend 폴더로 이동
             docker build -t nest-app . &&
-            docker run -d -p 5050:5050 --name nest-app nest-app
+            docker build -t nest-app -f ./backend/Dockerfile ./backend
           "
 
