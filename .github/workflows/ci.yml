@@ -34,9 +34,9 @@ jobs:
             docker rm nest-app || true &&
             mkdir -p /home/${{ secrets.AWS_EC2_USER }}/app &&
             cd /home/${{ secrets.AWS_EC2_USER }}/app &&
-            (git pull || git clone https://github.com/username/repo-name.git .) &&
+            git pull &&
             cd backend &&  # backend 폴더로 이동
-            docker build -t nest-app . &&
+            docker build -t nest-app ./backend &&
             docker run -d -p 5050:5050 --name nest-app nest-app
           "
 
