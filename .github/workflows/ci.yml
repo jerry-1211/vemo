@@ -37,5 +37,6 @@ jobs:
             git pull &&
             docker build -t nest-app -f ./backend/Dockerfile . &&  # Dockerfile 위치 지정, 컨텍스트는 루트
             docker run -d -p 5050:5050 --name nest-app nest-app
+            docker ps -a
           "
 
