@@ -35,7 +35,7 @@ jobs:
             mkdir -p /home/${{ secrets.AWS_EC2_USER }}/app &&
             cd /home/${{ secrets.AWS_EC2_USER }}/app &&
             git pull &&
-            docker build -t nest-app -f ./backend/Dockerfile . &&  # Dockerfile 위치 지정, 컨텍스트는 루트
+            docker build --no-cache -t nest-app -f ./backend/Dockerfile . &&  # 캐시 무시하고 Docker 이미지 빌드
             docker run -d -p 5050:5050 --name nest-app nest-app
             docker ps -a
           "
