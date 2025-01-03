@@ -32,8 +32,9 @@ jobs:
           ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }} "
             docker stop nest-app || true &&
             docker rm nest-app || true &&
+            mkdir -p /home/${{ secrets.AWS_EC2_USER }}/app &&
             cd /home/${{ secrets.AWS_EC2_USER }}/app &&
-            git pull &&
+            git pull || git clone <YOUR_REPO_URL> . &&
             docker build -t nest-app . &&
-            docker run -d -p 3000:3000 --name nest-app nest-app
+            docker run -d -p 5050:5050 --name nest-app nest-app
           "
