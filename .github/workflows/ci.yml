@@ -20,6 +20,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.AWS_EC2_HOST }} >> ~/.ssh/known_hosts
 
+      # SSH 연결을 먼저 테스트
+      - name: Test SSH Connection
+        run: |
+          ssh -i ~/.ssh/id_rsa ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }} "echo 'SSH connection successful'"
+
+      # SSH 연결이 성공했다면 배포 진행
       - name: Deploy to EC2
         run: |
           ssh ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }} "
