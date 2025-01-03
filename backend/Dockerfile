@@ -4,16 +4,16 @@ FROM node:22
 # 작업 디렉토리 생성
 WORKDIR /usr/src/app/backend
 
-# package.json 파일들을 복사
+# package.json과 package-lock.json 파일들을 먼저 복사
 COPY package*.json ./
 
 # 전역으로 @nestjs/cli 설치
 RUN npm install -g @nestjs/cli
 
-# 의존성 설치
-RUN npm install
+# 의존성 설치 (package-lock.json 기준으로 깔끔하게 설치)
+RUN npm ci
 
-# 소스 코드 복사
+# 소스 코드 복사 (node_modules 덮어쓰기 방지)
 COPY . .
 
 # 권한 설정
