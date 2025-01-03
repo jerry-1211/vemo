@@ -28,5 +28,5 @@ RUN npx nest build
 # 개발 모드로 실행
 CMD ["npm", "run", "start:dev"]
 
-# 포트 노출
+# 포트 5050
 EXPOSE 5050
